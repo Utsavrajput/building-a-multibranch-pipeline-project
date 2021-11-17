@@ -1,23 +1,18 @@
 pipeline {
     agent {
-        docker {
-            image 'node:6-alpine'
-            args '-p 3000:3000 -p 5000:5000' 
-        }
+        label "agent01"
     }
-    environment {
-        CI = 'true'
-    }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: "100"))
+}
     stages {
         stage('Build') {
             steps {
-                sh 'npm install'
+                sh "pwd"
+                sh "$HOSTNAME"
+                sh "printenv | sort"
             }
         }
-        stage('Test') {
-            steps {
-                sh './jenkins/scripts/test.sh'
-            }
-        }
+       
     }
 }
