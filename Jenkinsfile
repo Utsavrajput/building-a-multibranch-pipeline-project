@@ -3,7 +3,7 @@ pipeline {
         label "agent01"
     }
     options {
-        buildDiscarder(logRotator(numToKeepStr: '100'))
+        buildDiscarder(logRotator(daysToKeepStr: '100'))
 }
     stages {
         stage('Build') {
